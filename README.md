@@ -1,19 +1,45 @@
-[![Build Status](https://travis.ibm.com/Zulikah-Latief-CIC/Introduction-to-MLOps.svg?token=dzz9gFm4edHvqziqXpsS&branch=main)](https://travis.ibm.com/Zulikah-Latief-CIC/Introduction-to-MLOps)
+## Deploying weather prediction model on IBM cloud Pak for Data
 
+Tools used:
+- GitHub - code versioning
+- DVC - data, model and metrics versioning and workflow orchestration (dvc repro)
+- Terraform - setup IBM infrastructure using IaaC
+- IBM Watson ML- Deploying ML models
+- IBM Watson Openscale - Monitor model performance
 
-This repo is an introduction to the practices for standardizing the deployment of ML applications. It is an intoduction to the prinicples of MLOps:
+![My Image](project_structure.png)
 
-The following tasks were done:
-- Create poetry environment for ML project (dependency management)
-- Follow an Ops-first folder structure (https://ibm.github.io/data-science-best-practices/)
-- Develop ML model that estimates ride duration, given information about pickup and drop location (used jupyter notebook)
-- Use python scripts to convert non-modular JNs to automated pipeline
-- Add and initialise Git repo to version code
-- Add and configure DVC to version data
-- Set up TravisCI for Continuous Integration (CI) 
-- Use mlflow for experiment tracking, model versioning
-- Log metrics and parameters (used hyperopt for parameter tuning)
-- Containerize the best model, along with dependencies using docker 
-- Use flask to build a web service that estimates the ride duration 
+## Steps
 
+- Create infrastructure on IBM cloud
 
+**`terraform init, terraform plan , terraform apply`**
+
+- Configure and authenticate Cloud Object Storage (DVC)
+
+```python
+dvc remote modify --local remote-storage access_key_id "..."
+dvc remote modify --local remote-storage secret_access_key "..."
+```
+
+- Run dvc pipeline (dvc repro)
+
+```python
+dvc repro
+```
+
+- Push all data, metrics to the cloud
+- Create workspace/deployment space
+
+```python
+python Infrastructure/datapak_manage.py (options)
+```
+
+- Deploy model to the cloud deployment space
+
+```python
+python src/pipeline/model_deploy_pipeline.py reports/train_pipe.joblib . ./credentials.yaml
+```
+
+- Update model API
+- Send data request to deployed model API

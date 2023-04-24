@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "mlops project 2"
+version = "0.1.0"
+description = ""
+authors = ["Zulikah"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+scikit-learn = "1.0.2"
+homebrew = "^0.2.5"
+ibm-watson-machine-learning = "^1.0.272"
+dvc = {extras = ["s3"], version = "^2.43.1"}
+matplotlib = "^3.6.3"
+joblib = "0.17.0"
+black = "^22.12.0"
+ibm-cloud-sdk-core = "3.10.1"
+ibm-ai-openscale = "2.1.21"
+ibm-watson-openscale = "3.0.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
