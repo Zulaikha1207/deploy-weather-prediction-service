@@ -1,0 +1,23 @@
+data:
+  path_data: 'data/weatherAUS.csv'
+
+data_preprocessing:
+  drop_percent: 0.15
+  preprocessed_csv: data/preprocessed_df.csv
+
+train:
+  target_column: RainTomorrow
+  test_size: 0.3
+  random_state: 42
+  train_pipe_path: reports/train_pipe.joblib
+
+model: 
+  criterion: gini
+  max_depth: 12
+  max_features: auto
+  n_estimators: 5
+
+evaluate:
+  metrics_file_path: reports/metrics_file.json
+  roc_plots_path: reports/roc.png
+  precision_recall_plot_path: reports/precision_recall_curve.png
