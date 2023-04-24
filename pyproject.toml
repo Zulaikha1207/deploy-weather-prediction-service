@@ -18,6 +18,7 @@ ibm-cloud-sdk-core = "3.10.1"
 ibm-ai-openscale = "2.1.21"
 ibm-watson-openscale = "3.0.10"
 numpy = "^1.24.3"
+flask = "^2.2.3"
 
 
 [build-system]
