@@ -29,3 +29,8 @@ infrastructure:
 openscale:
   os_url: https://api.aiopenscale.cloud.ibm.com
   sub_id: 0b0dea74-1f19-48ae-a04f-6899aaebf9a7
+
+test:
+  token_url: https://iam.cloud.ibm.com/identity/token
+  grant_type: urn:ibm:params:oauth:grant-type:apikey
+  model_api: https://us-south.ml.cloud.ibm.com/ml/v4/deployments/f4f2b4a0-4bdc-4d6f-8fbf-612c3f265174/predictions?version=2023-05-03
