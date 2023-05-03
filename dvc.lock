@@ -1,0 +1,83 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/stages/preprocess.py --config=params.yaml
+    deps:
+    - path: data/weatherAUS.csv
+      md5: 4858cb3ac07a58b4da9c0e68e96417e6
+      size: 15600997
+    - path: src/stages/preprocess.py
+      md5: 5d2e812a38c3564ef6ada051bdd8cb62
+      size: 2635
+    params:
+      params.yaml:
+        data:
+          path_data: data/weatherAUS.csv
+        data_preprocessing:
+          drop_percent: 0.15
+          preprocessed_csv: data/preprocessed_df.csv
+    outs:
+    - path: data/preprocessed_df.csv
+      md5: 2811f15f473659d5dfd5e1eda6892568
+      size: 19507550
+  train:
+    cmd: python src/stages/train.py --config=params.yaml
+    deps:
+    - path: data/preprocessed_df.csv
+      md5: 2811f15f473659d5dfd5e1eda6892568
+      size: 19507550
+    - path: src/stages/train.py
+      md5: 6250e88ed21509b98b31398c672bc08a
+      size: 1935
+    params:
+      params.yaml:
+        data_preprocessing:
+          drop_percent: 0.15
+          preprocessed_csv: data/preprocessed_df.csv
+        model:
+          criterion: gini
+          max_depth: 12
+          max_features: auto
+          n_estimators: 5
+        train:
+          target_column: RainTomorrow
+          test_size: 0.3
+          random_state: 42
+          train_pipe_path: reports/train_pipe.joblib
+    outs:
+    - path: reports/train_pipe.joblib
+      md5: 3563b89ce1aa42196c00f328a3fd0c52
+      size: 418375
+  evaluate:
+    cmd: python src/stages/evaluate.py --config=params.yaml
+    deps:
+    - path: reports/train_pipe.joblib
+      md5: 3563b89ce1aa42196c00f328a3fd0c52
+      size: 418375
+    - path: src/stages/evaluate.py
+      md5: ece67861ddf2fcfe4a0ef25bdc6bd085
+      size: 4400
+    params:
+      params.yaml:
+        data_preprocessing:
+          drop_percent: 0.15
+          preprocessed_csv: data/preprocessed_df.csv
+        evaluate:
+          metrics_file_path: reports/metrics_file.json
+          roc_plots_path: reports/roc.png
+          precision_recall_plot_path: reports/precision_recall_curve.png
+        train:
+          target_column: RainTomorrow
+          test_size: 0.3
+          random_state: 42
+          train_pipe_path: reports/train_pipe.joblib
+    outs:
+    - path: reports/metrics_file.json
+      md5: 3a7eddc270a5ffe19cd0c4ab91e457f2
+      size: 141
+    - path: reports/precision_recall_curve.png
+      md5: fe0270b86c64a037755913a65173e2e0
+      size: 20743
+    - path: reports/roc.png
+      md5: b81b97354b46db8146fdf8c8fc588caa
+      size: 26686
