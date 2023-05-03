@@ -1,0 +1,9 @@
+#.terraform folder
+.terraform/
+.terraform.lock.hcl
+output.json
+terraform.tfstate
+terraform.tfvars
+terraform.tfstate.backup
+infra_state.json
+
