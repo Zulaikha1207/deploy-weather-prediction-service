@@ -21,3 +21,11 @@ evaluate:
   metrics_file_path: reports/metrics_file.json
   roc_plots_path: reports/roc.png
   precision_recall_plot_path: reports/precision_recall_curve.png
+
+infrastructure:
+  terraform_output_path: Infrastructure/terraform/terraform.tfstate
+  wml_url: https://us-south.ml.cloud.ibm.com
+
+openscale:
+  os_url: https://api.aiopenscale.cloud.ibm.com
+  sub_id: 0b0dea74-1f19-48ae-a04f-6899aaebf9a7
