@@ -91,8 +91,9 @@ python src/pipeline/model_deploy_pipeline.py reports/train_pipe.joblib . ./crede
 python src/pipeline/test.py
 ```
 
-- If you want to go a step further, you can setup model monitoring using Watson Openscale (note: I manually created an instance of Watson Openscale on IBM cloud). You simply have to feed the deployed model's subscription ID and the deployment space ID to Watson openscale to let it know which model to monitor. In order for Openscale to monitor the performance, you need to send it live data. In my case, I fed a new test data set to openscale using the IBM openscale dasboard. Openscale allows you to monitor drift rate, fairness and basiness as well as feature importance. It also uses explananbulity libraries such as SHAP to explain each prediction. Run the following script:
+- If you want to go a step further, you can setup model monitoring using Watson Openscale (note: I manually created an instance of Watson Openscale on IBM cloud). You simply have to feed the deployed model's subscription ID and the deployment space ID to Watson openscale to let it know which model to monitor. In order for Openscale to monitor the performance, you need to send it live data. In my case, I fed a new test data set to openscale using the IBM openscale dasboard. Openscale allows you to monitor drift rate, fairness and basiness as well as feature importance. It also uses explananbulity libraries such as SHAP to explain each prediction. The figure below (Watson openscale dashboard) shows each features' relative weight indicating how strongly they influenced the model’s predicted outcome. Run the following script:
 
 ```python
 python src/pipeline/openscale.py
 ```
+![My Image](explainability-openscale.png)
