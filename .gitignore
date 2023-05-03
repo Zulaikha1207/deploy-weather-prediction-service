@@ -115,3 +115,5 @@ assets/lstm_weather_test_data/
 
 #MacOS X
 .DS_Store
+
+/credentials.yaml
