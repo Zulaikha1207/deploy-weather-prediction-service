@@ -1,6 +1,6 @@
 ## Deploying weather prediction model on IBM cloud Pak for Data
 
-This repo contains a weather prediction model that is deployed on IBM cloud. The weather prediction model is a classification model that predicts if it will rain tomorrow based on time series data about the past weather conditions. The main aim of this repo is to build an end-to-end ML service that can be deployed on a production-like environment while following MLOps priniciples of versoning, automating, reproducibulity and readability!
+This repo contains a weather prediction model that is deployed on IBM cloud. The model is a Random Forest classification model that predicts if it will rain tomorrow based on time series data about the past weather conditions. The main aim of this repo is to build an end-to-end ML service that can be deployed on a production-like environment while following MLOps priniciples of versoning, automating, reproducibulity and readability!
 
 Tools used:
 - Poetry - Dependency management
@@ -67,6 +67,9 @@ dvc repro
 ```python
 dvc push
 ```
+The following is one of the plots pushed to IBM cloud. The plot shows the precison recall graph of the Random Forest Classifier!
+
+![My Image](precession-recall.png)
 
 - Create workspace/deployment space to deploy our model from the previous step. This creates a deployment space called mlops_project. The environmnet of the deployment space must match the environment of the local development space. If the python version or the scikit-learn version differs, the deployment will fail!
 
