@@ -51,9 +51,9 @@ dvc add data/weatherAUS.csv
 ```
 `dvc add` works the same way `git add` command. The dataset is now under DVC local control and DVC cache(which is by default local but can be configured to be shared). But now, you need to put your data under Git version control with `git add`. Note that DVC created two files named `weatherAUS.csv.dvc` and `.gitignore` in your data folder. These files are responsible for *codifying* your data:
 
-  - weatherAUS.csv.dvc: This file points where your actual data is and every time that your data change, this file changes too.
+   - weatherAUS.csv.dvc: This file points where your actual data is and every time that your data change, this file changes too.
 
-  - .gitignore: This file won't allow git to upload your data file to your repository. DVC creates automatically so you won't need to worry about it.
+   - .gitignore: This file won't allow git to upload your data file to your repository. DVC creates automatically so you won't need to worry about it.
 
 These metafiles with `.dvc` extension are YAML files that contain some key-value pair information about your data or model. The *md5* is a very common hash function that takes a file content and produces a string of thirty-two characters. So if you make just a small change in a data file or model controlled by DVC, the md5 hash will be recalculated and that's how your team mates will keep track of what's new in your experiment.
 
