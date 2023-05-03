@@ -1,0 +1,39 @@
+stages:
+  preprocess:
+    cmd: 'python src/stages/preprocess.py --config=params.yaml'
+    deps:
+    - src/stages/preprocess.py
+    - data/weatherAUS.csv 
+    params:
+    - data
+    - data_preprocessing
+    outs:
+    - data/preprocessed_df.csv
+  
+  train:
+    cmd: 'python src/stages/train.py --config=params.yaml'
+    deps:
+    - src/stages/train.py
+    - data/preprocessed_df.csv
+    params:
+    - data_preprocessing
+    - train
+    - model
+    outs:
+    - reports/train_pipe.joblib:
+        cache: false
+
+  evaluate:
+    cmd: 'python src/stages/evaluate.py --config=params.yaml'
+    deps:
+    - src/stages/evaluate.py
+    - reports/train_pipe.joblib
+    params:
+    - data_preprocessing
+    - evaluate
+    - train
+    outs:
+    - reports/precision_recall_curve.png
+    - reports/roc.png
+    metrics:
+    - reports/metrics_file.json
